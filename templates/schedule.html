@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA | Student Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="profile-setup-body">
+<div class="background-circle circle-one"></div>
+<div class="background-circle circle-two"></div>
+<div class="profile-setup-container">
+    <p class="small-text">NEXORA • STUDENT</p>
+    <h1>Create Your Profile</h1>
+    <p class="profile-setup-subtitle">
+        Tell us a little about yourself to personalize your academic space.
+    </p>
+    <form action="/student" method="POST" enctype="multipart/form-data">
+        <div class="profile-upload">
+            <div class="profile-upload-circle">
+                {% if student.profile_picture %}
+                    <img src="{{ url_for('static', filename='uploads/' + student.profile_picture) }}">
+                {% else %}
+                    <span>+</span>
+                {% endif %}
+            </div>
+            <label for="profile_picture">Upload Profile Picture</label>
+            <input
+                type="file"
+                id="profile_picture"
+                name="profile_picture"
+                accept="image/*"
+            >
+        </div>
+        <div class="profile-form-grid">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input
+                    type="text"
+                    name="name"
+                    value="{{ student.name }}"
+                    placeholder="Enter your name"
+                    required
+                >
+            </div>
+            <div class="form-group">
+                <label>Grade</label>
+                <input
+                    type="text"
+                    name="grade"
+                    value="{{ student.grade }}"
+                    placeholder="e.g. Grade 11"
+                    required
+                >
+            </div>
+            <div class="form-group">
+                <label>Section</label>
+                <input
+                    type="text"
+                    name="section"
+                    value="{{ student.section }}"
+                    placeholder="e.g. Q"
+                    required
+                >
+            </div>
+            <div class="form-group">
+                <label>Adviser</label>
+                <input
+                    type="text"
+                    name="adviser"
+                    value="{{ student.adviser }}"
+                    placeholder="Enter your adviser"
+                    required
+                >
+            </div>
+        </div>
+        <button type="submit" class="profile-continue-button">
+            CONTINUE →
+        </button>
+    </form>
+    <a href="/role" class="role-back">
+        ← Choose Another Role
+    </a>
+</div>
+</body>
+</html>

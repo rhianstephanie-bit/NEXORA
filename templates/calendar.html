@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA | Calendar</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body class="dashboard-body">
+
+    <!-- BACKGROUND -->
+
+    <div class="background-circle circle-one"></div>
+    <div class="background-circle circle-two"></div>
+    <div class="background-circle circle-three"></div>
+
+
+    <div class="dashboard">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                NEXORA
+            </div>
+
+            <p class="sidebar-label">
+                STUDENT
+            </p>
+
+
+            <nav>
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="nav-item">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('student_page') }}"
+                   class="nav-item">
+                    Profile
+                </a>
+
+                <a href="{{ url_for('calendar') }}"
+                   class="nav-item active">
+                    Calendar
+                </a>
+
+                <a href="{{ url_for('calendar') }}"
+                   class="nav-item">
+                    Assignments
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <a href="/" class="back-home">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+
+            <!-- HEADER -->
+
+            <div class="top-header">
+
+                <p class="small-text">
+                    ORGANIZE YOUR SCHOOL LIFE
+                </p>
+
+                <h1 class="page-title">
+                    Academic Calendar
+                </h1>
+
+                <p class="page-subtitle">
+                    Add deadlines and keep track of your schoolwork.
+                </p>
+
+            </div>
+
+
+            <!-- ADD ASSIGNMENT -->
+
+            <section class="calendar-add-card">
+
+                <div class="section-heading">
+
+                    <p class="small-text">
+                        NEW TASK
+                    </p>
+
+                    <h2>
+                        Add an Assignment
+                    </h2>
+
+                </div>
+
+
+                <form method="POST">
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Assignment Title
+                            </label>
+
+                            <input
+                                type="text"
+                                name="title"
+                                placeholder="Example: Research Chapter 1"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Subject
+                            </label>
+
+                            <input
+                                type="text"
+                                name="subject"
+                                placeholder="Example: Research"
+                                required
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Due Date
+                            </label>
+
+                            <input
+                                type="date"
+                                name="due_date"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Description
+                            </label>
+
+                            <input
+                                type="text"
+                                name="description"
+                                placeholder="Add a short note..."
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button type="submit">
+                        + Add Assignment
+                    </button>
+
+
+                </form>
+
+            </section>
+
+
+            <!-- ASSIGNMENTS -->
+
+            <section class="assignment-section">
+
+
+                <div class="section-heading">
+
+                    <p class="small-text">
+                        YOUR SCHOOLWORK
+                    </p>
+
+                    <h2>
+                        Your Assignments
+                    </h2>
+
+                </div>
+
+
+                {% if assignments %}
+
+
+                <div class="assignment-list">
+
+
+                    {% for assignment in assignments %}
+
+
+                    <div class="assignment-card
+                        {% if assignment.get('completed', False) %}
+                            completed-assignment
+                        {% endif %}">
+
+
+                        <!-- DATE -->
+
+                        <div class="assignment-date">
+
+                            <span>
+                                DUE
+                            </span>
+
+                            <strong>
+                                {{ assignment.due_date }}
+                            </strong>
+
+                        </div>
+
+
+                        <!-- CHECK BUTTON -->
+
+                        <div class="assignment-check">
+
+                            <form
+                                method="POST"
+                                action="{{ url_for('complete_assignment', assignment_id=loop.index0) }}"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="check-button"
+                                    title="Mark assignment as completed"
+                                >
+
+                                    {% if assignment.get('completed', False) %}
+
+                                        ✓
+
+                                    {% else %}
+
+                                        ○
+
+                                    {% endif %}
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+
+                        <!-- INFORMATION -->
+
+                        <div class="assignment-info">
+
+
+                            {% if assignment.get('completed', False) %}
+
+                                <span class="assignment-status completed-status">
+                                    COMPLETED
+                                </span>
+
+                            {% else %}
+
+                                <span class="assignment-status pending-status">
+                                    PENDING
+                                </span>
+
+                            {% endif %}
+
+
+                            <h3>
+                                {{ assignment.title }}
+                            </h3>
+
+
+                            <p>
+                                {{ assignment.subject }}
+                            </p>
+
+
+                            {% if assignment.description %}
+
+                                <small>
+                                    {{ assignment.description }}
+                                </small>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+                {% else %}
+
+
+                <!-- EMPTY STATE -->
+
+                <div class="empty-calendar">
+
+                    <div class="empty-icon">
+                        +
+                    </div>
+
+                    <h3>
+                        No assignments yet
+                    </h3>
+
+                    <p>
+                        Add your first assignment above.
+                    </p>
+
+                </div>
+
+
+                {% endif %}
+
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+</body>
+
+</html>

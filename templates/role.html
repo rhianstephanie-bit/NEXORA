@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA | Choose Role</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="role-body">
+<div class="background-circle circle-one"></div>
+<div class="background-circle circle-two"></div>
+<div class="background-circle circle-three"></div>
+<div class="role-container">
+    <p class="small-text">WELCOME TO</p>
+    <h1 class="role-logo">NEXORA</h1>
+    <h2>Choose Your Role</h2>
+    <p class="role-subtitle">
+        Select how you want to continue.
+    </p>
+    <div class="role-grid">
+        <a href="/student" class="role-card">
+            <div class="role-icon">S</div>
+            <h3>STUDENT</h3>
+            <p>
+                Access your academic space, assignments,
+                calendar, progress, weather, and mini games.
+            </p>
+            <span>Continue as Student →</span>
+        </a>
+        <a href="/teacher-profile" class="role-card">
+            <div class="role-icon">T</div>
+            <h3>TEACHER</h3>
+            <p>
+                Manage assignments, schedules,
+                announcements, materials, and student tasks.
+            </p>
+            <span>Continue as Teacher →</span>
+        </a>
+    </div>
+    <a href="/" class="role-back">← Back to NEXORA</a>
+</div>
+</body>
+</html>

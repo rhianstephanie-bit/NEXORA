@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA | Class Information</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <div class="brand">NEXORA</div>
+
+            <p class="sidebar-label">TEACHER</p>
+
+            <nav>
+
+                <a href="{{ url_for('teacher_page') }}" class="nav-item">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('class_info') }}" class="nav-item active">
+                    Class Information
+                </a>
+
+                <a href="{{ url_for('calendar') }}" class="nav-item">
+                    Assignments
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="{{ url_for('teacher_page') }}" class="back-home">
+                    ← Back to Teacher Dashboard
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <p class="small-text">
+                        CLASS INFORMATION
+                    </p>
+
+                    <h1 class="page-title">
+                        Grade 11 - Q
+                    </h1>
+
+                    <p class="page-subtitle">
+                        View your class information below.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="class-info-grid">
+
+                <div class="class-info-box">
+                    <span>GRADE</span>
+                    <strong>Grade 11</strong>
+                </div>
+
+                <div class="class-info-box">
+                    <span>SECTION</span>
+                    <strong>Q</strong>
+                </div>
+
+                <div class="class-info-box">
+                    <span>SUBJECT</span>
+                    <strong>ICT</strong>
+                </div>
+
+                <div class="class-info-box">
+                    <span>STRAND</span>
+                    <strong>ICT / CSS</strong>
+                </div>
+
+                <div class="class-info-box">
+                    <span>CLASS SIZE</span>
+                    <strong>42 Students</strong>
+                </div>
+
+                <div class="class-info-box">
+                    <span>SCHOOL YEAR</span>
+                    <strong>2026–2027</strong>
+                </div>
+
+            </div>
+
+
+            <div class="class-message-card">
+
+                <h2>Class Overview</h2>
+
+                <p>
+                    This section contains the basic information
+                    about the class. More student management
+                    features can be added to NEXORA later.
+                </p>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

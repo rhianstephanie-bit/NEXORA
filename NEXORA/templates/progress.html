@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA | Study Progress</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                NEXORA
+            </div>
+
+            <p class="sidebar-label">
+                STUDENT
+            </p>
+
+            <nav>
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="nav-item">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('student_page') }}"
+                   class="nav-item">
+                    Profile
+                </a>
+
+                <a href="{{ url_for('calendar') }}"
+                   class="nav-item">
+                    Calendar
+                </a>
+
+                <a href="{{ url_for('calendar') }}"
+                   class="nav-item">
+                    Assignments
+                </a>
+
+                <a href="{{ url_for('weather') }}"
+                   class="nav-item">
+                    Weather
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="back-home">
+                    ← Back to Dashboard
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <p class="small-text">
+                        ACADEMIC PROGRESS
+                    </p>
+
+                    <h1 class="page-title">
+                        Study Progress
+                    </h1>
+
+                    <p class="page-subtitle">
+                        See how you're doing with your assignments.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stats">
+
+                <div class="stat-card">
+
+                    <span class="stat-icon">
+                        #
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Total
+                        </small>
+
+                        <strong>
+                            {{ total_assignments }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-icon">
+                        ✓
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Completed
+                        </small>
+
+                        <strong>
+                            {{ completed_assignments }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-icon">
+                        !
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Pending
+                        </small>
+
+                        <strong>
+                            {{ pending_assignments }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-icon">
+                        %
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Progress
+                        </small>
+
+                        <strong>
+                            {{ progress }}%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-card">
+
+                <div class="progress-header">
+
+                    <span>
+                        Overall Assignment Progress
+                    </span>
+
+                    <strong>
+                        {{ progress }}%
+                    </strong>
+
+                </div>
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-fill"
+                        style="width: {{ progress }}%;">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="dashboard-button"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

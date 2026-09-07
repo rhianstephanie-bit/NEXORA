@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA | Weather</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+    <div class="dashboard">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                NEXORA
+            </div>
+
+            <p class="sidebar-label">
+                STUDENT
+            </p>
+
+
+            <nav>
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="nav-item">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('student_page') }}"
+                   class="nav-item">
+                    Profile
+                </a>
+
+                <a href="{{ url_for('calendar') }}"
+                   class="nav-item">
+                    Calendar
+                </a>
+
+                <a href="{{ url_for('calendar') }}"
+                   class="nav-item">
+                    Assignments
+                </a>
+
+                <a href="{{ url_for('weather') }}"
+                   class="nav-item active">
+                    Weather
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="back-home">
+                    ← Back to Dashboard
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <p class="small-text">
+                        NEXORA WEATHER
+                    </p>
+
+                    <h1 class="page-title">
+                        Today's Weather
+                    </h1>
+
+                    <p class="page-subtitle">
+                        Check the weather before heading to school.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- WEATHER CARD -->
+<!-- WEATHER CARD -->
+
+<div class="weather-card">
+
+    {% if weather %}
+
+        <div class="weather-icon">
+            ☼
+        </div>
+
+        <div class="weather-info">
+
+            <p class="weather-location">
+                Metro Manila, Philippines
+            </p>
+
+            <h2>
+                {{ weather.temperature }}°C
+            </h2>
+
+            <p>
+                Current Temperature
+            </p>
+
+            <div class="weather-details">
+
+                <div>
+                    <strong>
+                        {{ weather.humidity }}%
+                    </strong>
+
+                    <span>
+                        Humidity
+                    </span>
+                </div>
+
+                <div>
+                    <strong>
+                        {{ weather.wind }} km/h
+                    </strong>
+
+                    <span>
+                        Wind
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <div class="weather-info">
+
+            <h2>
+                Weather unavailable
+            </h2>
+
+            <p>
+                We couldn't get the current weather right now.
+                Please try again later.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+            <!-- BACK BUTTON -->
+
+            <a href="{{ url_for('dashboard') }}"
+               class="dashboard-button weather-back-button">
+
+                ← Back to Dashboard
+
+            </a>
+
+
+        </main>
+
+    </div>
+
+
+</body>
+
+</html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA | Weather</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+    <div class="dashboard">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                NEXORA
+            </div>
+
+            <p class="sidebar-label">
+                STUDENT
+            </p>
+
+
+            <nav>
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="nav-item">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('student_page') }}"
+                   class="nav-item">
+                    Profile
+                </a>
+
+                <a href="{{ url_for('calendar') }}"
+                   class="nav-item">
+                    Calendar
+                </a>
+
+                <a href="{{ url_for('calendar') }}"
+                   class="nav-item">
+                    Assignments
+                </a>
+
+                <a href="{{ url_for('weather') }}"
+                   class="nav-item active">
+                    Weather
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="back-home">
+                    ← Back to Dashboard
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <p class="small-text">
+                        NEXORA WEATHER
+                    </p>
+
+                    <h1 class="page-title">
+                        Today's Weather
+                    </h1>
+
+                    <p class="page-subtitle">
+                        Check the weather before heading to school.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- WEATHER CARD -->
+
+            <div class="weather-card">
+
+                <div class="weather-icon">
+                    ☼
+                </div>
+
+                <div class="weather-info">
+
+                    <p class="weather-location">
+                        Philippines
+                    </p>
+
+                    <h2>
+                        Weather Information
+                    </h2>
+
+                    <p>
+                        Weather data will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- BACK BUTTON -->
+
+            <a href="{{ url_for('dashboard') }}"
+               class="dashboard-button weather-back-button">
+
+                ← Back to Dashboard
+
+            </a>
+
+
+        </main>
+
+    </div>
+
+
+</body>
+
+</html>

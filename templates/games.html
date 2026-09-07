@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA | Mini Games</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+   <div id="quiz-area" class="quiz-area">
+    <h2>Ready to test your knowledge?</h2>
+    <p>Click "Start Quiz" to begin.</p>
+</div>
+
+<div id="memory-area" class="memory-area">
+    <h2>Memory Match</h2>
+    <p>Match the pairs!</p>
+
+    <div id="memory-board" class="memory-board"></div>
+
+    <p id="memory-message"></p>
+</div>
+
+<body class="dashboard-body">
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                NEXORA
+            </div>
+
+            <p class="sidebar-label">
+                STUDENT
+            </p>
+
+            <nav>
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="nav-item">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('student_page') }}"
+                   class="nav-item">
+                    Profile
+                </a>
+
+                <a href="{{ url_for('calendar') }}"
+                   class="nav-item">
+                    Calendar
+                </a>
+
+                <a href="{{ url_for('calendar') }}"
+                   class="nav-item">
+                    Assignments
+                </a>
+
+                <a href="{{ url_for('weather') }}"
+                   class="nav-item">
+                    Weather
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="back-home">
+                    ← Back to Dashboard
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <p class="small-text">
+                        NEXORA GAMES
+                    </p>
+
+                    <h1 class="page-title">
+                        Mini Games
+                    </h1>
+
+                    <p class="page-subtitle">
+                        Take a short break and have some fun.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="tool-grid">
+
+                <div class="tool-card">
+
+                    <div class="tool-symbol">
+                        ?
+                    </div>
+
+                    <h3>
+                        Quiz Challenge
+                    </h3>
+
+                    <p>
+                        Test your knowledge with quick
+                        academic questions.
+                    </p>
+
+                   <button onclick="startQuiz()" class="dashboard-button">
+    Start Quiz →
+</button>
+                </div>
+
+
+                <div class="tool-card">
+
+                    <div class="tool-symbol">
+                        #
+                    </div>
+
+                    <h3>
+                        Memory Match
+                    </h3>
+
+                    <p>
+                        Match the cards and challenge
+                        your memory.
+                    </p>
+
+                    <button onclick="startMemoryGame()" class="dashboard-button">
+    Play Memory Match →
+</button>
+                </div>
+
+
+                <div class="tool-card">
+
+                    <div class="tool-symbol">
+                        +
+                    </div>
+
+                    <h3>
+                        Coming Soon
+                    </h3>
+
+                    <p>
+                        More educational games will
+                        be added to NEXORA.
+                    </p>
+
+                    <button type="button">
+                        Coming Soon
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+<script>
+const questions = [
+    {
+        question: "What does CPU stand for?",
+        options: [
+            "Central Processing Unit",
+            "Computer Personal Unit",
+            "Central Program Utility",
+            "Computer Processing User"
+        ],
+        answer: 0
+    },
+    {
+        question: "Which device is used to connect multiple computers in a network?",
+        options: [
+            "Keyboard",
+            "Switch",
+            "Monitor",
+            "Printer"
+        ],
+        answer: 1
+    },
+    {
+        question: "What does HTML stand for?",
+        options: [
+            "Hyper Text Markup Language",
+            "High Technology Machine Language",
+            "Hyper Tool Management Language",
+            "Home Text Making Language"
+        ],
+        answer: 0
+    },
+    {
+        question: "Which one is a programming language?",
+        options: [
+            "Python",
+            "Windows",
+            "Google",
+            "Chrome"
+        ],
+        answer: 0
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function startQuiz() {
+    currentQuestion = 0;
+    score = 0;
+
+    showQuestion();
+}
+
+function showQuestion() {
+    const quiz = document.getElementById("quiz-area");
+
+    const question = questions[currentQuestion];
+
+    quiz.innerHTML = `
+        <h2>${question.question}</h2>
+
+        <div class="quiz-options">
+            ${question.options.map((option, index) => `
+                <button onclick="answerQuestion(${index})">
+                    ${option}
+                </button>
+            `).join("")}
+        </div>
+
+        <p>Question ${currentQuestion + 1} of ${questions.length}</p>
+    `;
+}
+
+function answerQuestion(selectedAnswer) {
+
+    if (selectedAnswer === questions[currentQuestion].answer) {
+        score++;
+    }
+
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+        showQuestion();
+    } else {
+        showResult();
+    }
+}
+
+
+
+
+
+
+function showResult() {
+
+
+    
+    const quiz = document.getElementById("quiz-area");
+
+    quiz.innerHTML = `
+        <h2>Quiz Complete!</h2>
+
+        <p class="quiz-score">
+            Your Score: ${score}/${questions.length}
+        </p>
+
+        <button onclick="startQuiz()" class="dashboard-button">
+            Play Again →
+        </button>
+    `;
+}
+</script>
+<script>
+const memorySymbols = ["💻", "💻", "🌐", "🌐", "🖥️", "🖥️", "⌨️", "⌨️"];
+
+let memoryCards = [];
+let firstCard = null;
+let secondCard = null;
+let locked = false;
+let matchedCards = 0;
+
+function startMemoryGame() {
+
+    memoryCards = [...memorySymbols].sort(() => Math.random() - 0.5);
+
+    firstCard = null;
+    secondCard = null;
+    locked = false;
+    matchedCards = 0;
+
+    const board = document.getElementById("memory-board");
+    const message = document.getElementById("memory-message");
+
+    message.textContent = "";
+
+    board.innerHTML = "";
+
+    memoryCards.forEach((symbol, index) => {
+
+        const card = document.createElement("button");
+
+        card.className = "memory-card";
+        card.textContent = "?";
+
+        card.onclick = function () {
+            flipCard(card, symbol);
+        };
+
+        board.appendChild(card);
+    });
+}
+
+function flipCard(card, symbol) {
+
+    if (locked || card.classList.contains("matched") || card === firstCard) {
+        return;
+    }
+
+    card.textContent = symbol;
+
+    if (!firstCard) {
+        firstCard = card;
+        return;
+    }
+
+    secondCard = card;
+    locked = true;
+
+    if (firstCard.textContent === secondCard.textContent) {
+
+        firstCard.classList.add("matched");
+        secondCard.classList.add("matched");
+
+        matchedCards += 2;
+
+        firstCard = null;
+        secondCard = null;
+        locked = false;
+
+        if (matchedCards === memoryCards.length) {
+            document.getElementById("memory-message").textContent =
+                "🎉 You matched them all!";
+        }
+
+    } else {
+
+        setTimeout(() => {
+
+            firstCard.textContent = "?";
+            secondCard.textContent = "?";
+
+            firstCard = null;
+            secondCard = null;
+            locked = false;
+
+        }, 800);
+    }
+}
+</script>
+    
+</body>
+
+</html>

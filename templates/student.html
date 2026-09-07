@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA | Student Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-body">
+<div class="background-circle circle-one"></div>
+<div class="background-circle circle-two"></div>
+<div class="dashboard">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">NEXORA</div>
+        <p class="sidebar-label">STUDENT</p>
+        <nav>
+            <a href="{{ url_for('dashboard') }}" class="nav-item">
+                Dashboard
+            </a>
+            <a href="{{ url_for('student_page') }}" class="nav-item active">
+                Profile
+            </a>
+            <a href="{{ url_for('calendar') }}" class="nav-item">
+                Calendar
+            </a>
+            <a href="{{ url_for('calendar') }}" class="nav-item">
+                Assignments
+            </a>
+        </nav>
+        <div class="sidebar-bottom">
+            <a href="/" class="back-home">
+                ← Home
+            </a>
+        </div>
+    </aside>
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="dashboard-header">
+            <div>
+                <p class="small-text">
+                    STUDENT PROFILE
+                </p>
+                <h1 class="page-title">
+                    Your Profile
+                </h1>
+                <p class="page-subtitle">
+                    Manage your student information.
+                </p>
+            </div>
+        </header>
+        <!-- PROFILE CARD -->
+        <section class="profile-page-card">
+            <div class="profile-page-header">
+                <div class="profile-large-picture">
+                    {% if student.profile_picture %}
+                    <img
+                        src="{{ url_for('static', filename='uploads/' + student.profile_picture) }}"
+                        alt="Student Profile Picture"
+                    >
+                    {% else %}
+                    <div class="profile-picture-placeholder">
+                        +
+                    </div>
+                    {% endif %}
+                </div>
+                <div>
+                    <p class="small-text">
+                        STUDENT
+                    </p>
+                    <h2>
+                        {{ student.name if student.name else "Student Name" }}
+                    </h2>
+                    <p>
+                        {{ student.grade if student.grade else "Grade" }}
+                        {{ student.section if student.section else "" }}
+                    </p>
+                </div>
+            </div>
+            <div class="profile-details">
+                <div class="profile-detail">
+                    <span>FULL NAME</span>
+                    <strong>
+                        {{ student.name if student.name else "Not provided" }}
+                    </strong>
+                </div>
+                <div class="profile-detail">
+                    <span>GRADE</span>
+                    <strong>
+                        {{ student.grade if student.grade else "Not provided" }}
+                    </strong>
+                </div>
+                <div class="profile-detail">
+                    <span>SECTION</span>
+                    <strong>
+                        {{ student.section if student.section else "Not provided" }}
+                    </strong>
+                </div>
+                <div class="profile-detail">
+                    <span>ADVISER</span>
+                    <strong>
+                        {{ student.adviser if student.adviser else "Not provided" }}
+                    </strong>
+                </div>
+            </div>
+<form action="{{ url_for('student_page') }}" method="POST" enctype="multipart/form-data">
+
+    <div class="profile-edit-grid">
+
+        <div class="edit-field">
+            <label>Profile Picture</label>
+            <input
+                type="file"
+                name="profile_picture"
+                accept="image/*"
+            >
+        </div>
+
+        <div class="edit-field">
+            <label>Full Name</label>
+            <input
+                type="text"
+                name="name"
+                value="{{ student.name }}"
+                required
+            >
+        </div>
+
+        <div class="edit-field">
+            <label>Grade</label>
+            <input
+                type="text"
+                name="grade"
+                value="{{ student.grade }}"
+                required
+            >
+        </div>
+
+        <div class="edit-field">
+            <label>Section</label>
+            <input
+                type="text"
+                name="section"
+                value="{{ student.section }}"
+                required
+            >
+        </div>
+
+        <div class="edit-field">
+            <label>Adviser</label>
+            <input
+                type="text"
+                name="adviser"
+                value="{{ student.adviser }}"
+                required
+            >
+        </div>
+
+    </div>
+
+    <button type="submit" class="profile-edit-button">
+        SAVE CHANGES
+    </button>
+
+</form>s
+        </section>
+    </main>
+</div>
+</body>
+</html>

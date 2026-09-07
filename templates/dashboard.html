@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA | Student Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-body">
+<div class="background-circle circle-one"></div>
+<div class="background-circle circle-two"></div>
+<div class="dashboard">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">NEXORA</div>
+        <p class="sidebar-label">STUDENT</p>
+        <nav>
+            <a href="{{ url_for('dashboard') }}" class="nav-item active">
+                Dashboard
+            </a>
+            <a href="{{ url_for('student_page') }}" class="nav-item">
+                Profile
+            </a>
+            <a href="{{ url_for('calendar') }}" class="nav-item">
+                Calendar
+            </a>
+            <a href="{{ url_for('calendar') }}" class="nav-item">
+                Assignments
+            </a>
+        </nav>
+        <div class="sidebar-bottom">
+            <a href="/" class="back-home">
+                ← Home
+            </a>
+        </div>
+    </aside>
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- HEADER -->
+        <header class="dashboard-header">
+            <div>
+                <p class="small-text">
+                    STUDENT DASHBOARD
+                </p>
+                <h1 class="page-title">
+                    Hello, {{ student.name if student.name else "Student" }}!
+                </h1>
+                <p class="page-subtitle">
+                    Let's make today productive.
+                </p>
+            </div>
+            <a href="{{ url_for('student_page') }}" class="mini-profile">
+                {% if student.profile_picture %}
+                <img
+                    src="{{ url_for('static', filename='uploads/' + student.profile_picture) }}"
+                    alt="Profile Picture"
+                >
+                {% else %}
+                <div class="mini-profile-empty">
+                    +
+                </div>
+                {% endif %}
+                <div>
+                    <strong>
+                        {{ student.name if student.name else "Student" }}
+                    </strong>
+                    <span>
+                        {{ student.grade }} {{ student.section }}
+                    </span>
+                </div>
+            </a>
+        </header>
+        <!-- STATISTICS -->
+        <section class="dashboard-stats">
+            <div class="stat-card">
+                <span class="stat-icon">#</span>
+                <div>
+                    <small>Total</small>
+                    <strong>{{ total_assignments }}</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">✓</span>
+                <div>
+                    <small>Completed</small>
+                    <strong>{{ completed_assignments }}</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">!</span>
+                <div>
+                    <small>Pending</small>
+                    <strong>{{ pending_assignments }}</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">%</span>
+                <div>
+                    <small>Progress</small>
+                    <strong>{{ progress }}%</strong>
+                </div>
+            </div>
+        </section>
+        <!-- PROGRESS -->
+        <section class="progress-card">
+            <div class="progress-header">
+                <span>
+                    Assignment Progress
+                </span>
+                <strong>
+                    {{ progress }}%
+                </strong>
+            </div>
+            <div class="progress-track">
+                <div
+                    class="progress-fill"
+                    style="width: {{ progress }}%;"
+                ></div>
+            </div>
+        </section>
+        <!-- ACADEMIC SPACE -->
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <p class="small-text">
+                    YOUR TOOLS
+                </p>
+                <h2>
+                    Academic Space
+                </h2>
+            </div>
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <div class="tool-symbol">
+                        01
+                    </div>
+                    <h3>
+                        Calendar
+                    </h3>
+                    <p>
+                        Organize your assignments,
+                        deadlines, and school activities.
+                    </p>
+                    <a
+                        href="{{ url_for('calendar') }}"
+                        class="dashboard-button"
+                    >
+                        Open →
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-symbol">
+                        ✓
+                    </div>
+                    <h3>
+                        Assignments
+                    </h3>
+                    <p>
+                        View your schoolwork
+                        and track what is completed.
+                    </p>
+                    <a
+                        href="{{ url_for('calendar') }}"
+                        class="dashboard-button"
+                    >
+                        View →
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-symbol">
+                        ☼
+                    </div>
+                    <h3>
+                        Weather
+                    </h3>
+                    <p>
+                        Check the current weather
+                        before heading to school.
+                    </p>
+                    <a
+                        href="{{ url_for('weather') }}"
+                        class="dashboard-button"
+                    >
+                        Check →
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-symbol">
+                        %
+                    </div>
+                    <h3>
+                        Study Progress
+                    </h3>
+                    <p>
+                        See your completed and
+                        pending academic tasks.
+                    </p>
+                    <a
+                        href="{{ url_for('progress_page') }}"
+                        class="dashboard-button"
+                    >
+                        View →
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-symbol">
+                        +
+                    </div>
+                    <h3>
+                        Mini Games
+                    </h3>
+                    <p>
+                        Take a short break with
+                        educational games.
+                    </p>
+                    <a
+                        href="{{ url_for('games') }}"
+                        class="dashboard-button"
+                    >
+                        Play →
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- UPCOMING ASSIGNMENTS -->
+        <section class="upcoming-section">
+            <div class="section-title">
+                <h2>
+                    Upcoming Assignments
+                </h2>
+                <p>
+                    Your next school tasks.
+                </p>
+            </div>
+            <div class="upcoming-list">
+                {% if upcoming_assignments %}
+                    {% for assignment in upcoming_assignments %}
+                    <div class="upcoming-assignment">
+                        <div class="upcoming-info">
+                            <h3>
+                                {{ assignment.title }}
+                            </h3>
+                            <p>
+                                {{ assignment.subject }}
+                            </p>
+                            <small>
+                                Due: {{ assignment.due_date }}
+                            </small>
+                        </div>
+                        <div class="upcoming-status">
+                            {% if assignment.get('completed', False) %}
+                                <span class="status-completed">
+                                    ✓ Completed
+                                </span>
+                            {% else %}
+                                <span class="status-pending">
+                                    ! Pending
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-assignments">
+                        <h3>
+                            No assignments yet
+                        </h3>
+                        <p>
+                            Your upcoming schoolwork will appear here.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+        <!-- ANNOUNCEMENTS -->
+        <section class="upcoming-section">
+            <div class="section-title">
+                <h2>
+                    Class Announcements
+                </h2>
+                <p>
+                    Important updates from your teacher.
+                </p>
+            </div>
+            <div class="announcements-list">
+                {% if announcements %}
+                    {% for announcement in announcements %}
+                    <div class="announcement-card">
+                        <div class="tool-symbol">
+                            !
+                        </div>
+                        <div>
+                            <h3>
+                                {{ announcement.title }}
+                            </h3>
+                            <p>
+                                {{ announcement.message }}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-assignments">
+                        <h3>
+                            No announcements yet
+                        </h3>
+                        <p>
+                            Teacher announcements will appear here.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

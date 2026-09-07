@@ -1,0 +1,287 @@
+  <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA | Teacher Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <div class="brand">NEXORA</div>
+
+            <p class="sidebar-label">TEACHER</p>
+
+            <nav>
+
+                <a href="{{ url_for('teacher_page') }}" class="nav-item active">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('teacher_page') }}" class="nav-item">
+                    Class Information
+                </a>
+
+                <a href="{{ url_for('teacher_page') }}" class="nav-item">
+                    Assignments
+                </a>
+
+                <a href="{{ url_for('teacher_page') }}" class="nav-item">
+                    Schedule
+                </a>
+
+                <a href="{{ url_for('teacher_page') }}" class="nav-item">
+                    Announcements
+                </a>
+
+                <a href="{{ url_for('teacher_page') }}" class="nav-item">
+                    Materials
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="/" class="back-home">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <p class="small-text">
+                        TEACHER DASHBOARD
+                    </p>
+
+                    <h1 class="page-title">
+                        Welcome, Teacher!
+                    </h1>
+
+                    <p class="page-subtitle">
+                        Manage your class and keep everything organized.
+                    </p>
+
+                </div>
+
+            </div>
+<div class="dashboard-stats">
+
+    <div class="stat-card">
+        <span class="stat-icon">#</span>
+
+        <div>
+            <small>Total Assignments</small>
+            <strong>{{ total_assignments }}</strong>
+        </div>
+    </div>
+
+
+    <div class="stat-card">
+        <span class="stat-icon">✓</span>
+
+        <div>
+            <small>Completed</small>
+            <strong>{{ completed_assignments }}</strong>
+        </div>
+    </div>
+
+
+    <div class="stat-card">
+        <span class="stat-icon">!</span>
+
+        <div>
+            <small>Pending</small>
+            <strong>{{ pending_assignments }}</strong>
+        </div>
+    </div>
+
+</div>
+
+            <div class="teacher-info-card">
+
+                <div>
+                    <span>TEACHER</span>
+                    <strong>Teacher Name</strong>
+                </div>
+
+                <div>
+                    <span>SUBJECT</span>
+                    <strong>ICT</strong>
+                </div>
+
+                <div>
+                    <span>GRADE & SECTION</span>
+                    <strong>Grade 11 - Q</strong>
+                </div>
+
+            </div>
+
+
+            <div class="section-heading">
+
+                <p class="small-text">
+                    TEACHER TOOLS
+                </p>
+
+                <h2>
+                    Class Management
+                </h2>
+
+            </div>
+
+
+            <div class="tool-grid">
+
+                <div class="tool-card large-card">
+
+                    <div class="tool-symbol">
+                        +
+                    </div>
+
+                    <h3>
+                        Create Assignment
+                    </h3>
+
+                    <p>
+                        Create and post assignments for your students.
+                    </p>
+
+
+<a href="{{ url_for('calendar') }}" class="dashboard-button">
+    Create Assignment →
+</a>
+
+                </div>
+
+
+                <div class="tool-card">
+
+                    <div class="tool-symbol">
+                        #
+                    </div>
+
+                    <h3>
+                        Class Information
+                    </h3>
+
+                    <p>
+                        View your class and student information.
+                    </p>
+
+                    <button type="button" class="dashboard-button">
+    View Class →
+</button>
+
+                </div>
+
+
+                <div class="tool-card">
+
+                    <div class="tool-symbol">
+                        01
+                    </div>
+
+                    <h3>
+                        Manage Schedule
+                    </h3>
+
+                    <p>
+                        Organize your class schedule and activities.
+                    </p>
+
+                    <a href="{{ url_for('schedule') }}" class="dashboard-button">
+    View Schedule →
+</a>
+                </div>
+
+
+                <div class="tool-card">
+
+                    <div class="tool-symbol">
+                        !
+                    </div>
+
+                    <h3>
+                        Announcements
+                    </h3>
+
+                    <p>
+                        Share important announcements with students.
+                    </p>
+
+                    <a href="{{ url_for('announcements_page') }}" class="dashboard-button">
+    Post Announcement →
+</a>
+
+                </div>
+
+
+                <div class="tool-card">
+
+                    <div class="tool-symbol">
+                        ▣
+                    </div>
+
+                    <h3>
+                        Subject Materials
+                    </h3>
+
+                    <p>
+                        Organize learning materials and resources.
+                    </p>
+<a href="{{ url_for('materials_page') }}" class="dashboard-button">
+    Manage Materials →
+</a>
+
+                </div>
+
+
+                <div class="tool-card">
+
+                    <div class="tool-symbol">
+                        ✓
+                    </div>
+
+                    <h3>
+                        Task Tracker
+                    </h3>
+
+                    <p>
+                        Monitor student tasks and submissions.
+                    </p>
+<a href="{{ url_for('task_tracker') }}" class="dashboard-button">
+    View Tracker →
+</a>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>      

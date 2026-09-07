@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA | Task Tracker</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <div class="brand">NEXORA</div>
+
+            <p class="sidebar-label">TEACHER</p>
+
+            <nav>
+
+                <a href="{{ url_for('teacher_page') }}" class="nav-item">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('class_info') }}" class="nav-item">
+                    Class Information
+                </a>
+
+                <a href="{{ url_for('schedule') }}" class="nav-item">
+                    Schedule
+                </a>
+
+                <a href="{{ url_for('announcements_page') }}" class="nav-item">
+                    Announcements
+                </a>
+
+                <a href="{{ url_for('materials_page') }}" class="nav-item">
+                    Materials
+                </a>
+
+                <a href="{{ url_for('task_tracker') }}" class="nav-item active">
+                    Task Tracker
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="{{ url_for('teacher_page') }}" class="back-home">
+                    ← Back to Teacher Dashboard
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <p class="small-text">
+                        TEACHER TOOLS
+                    </p>
+
+                    <h1 class="page-title">
+                        Task Tracker
+                    </h1>
+
+                    <p class="page-subtitle">
+                        Monitor assignment completion.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stats">
+
+                <div class="stat-card">
+                    <span class="stat-icon">#</span>
+
+                    <div>
+                        <small>Total</small>
+                        <strong>{{ total }}</strong>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <span class="stat-icon">✓</span>
+
+                    <div>
+                        <small>Completed</small>
+                        <strong>{{ completed }}</strong>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <span class="stat-icon">!</span>
+
+                    <div>
+                        <small>Pending</small>
+                        <strong>{{ pending }}</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="section-heading">
+
+                <p class="small-text">
+                    ASSIGNMENT STATUS
+                </p>
+
+                <h2>
+                    Student Tasks
+                </h2>
+
+            </div>
+
+
+            <div class="tracker-list">
+
+                {% if assignments %}
+
+                    {% for assignment in assignments %}
+
+                    <div class="tracker-card">
+
+                        <div class="tracker-info">
+
+                            <h3>
+                                {{ assignment.title }}
+                            </h3>
+
+                            <p>
+                                {{ assignment.subject }}
+                            </p>
+
+                            <small>
+                                Due: {{ assignment.due_date }}
+                            </small>
+
+                        </div>
+
+
+                        <div>
+
+                            {% if assignment.get('completed', False) %}
+
+                                <span class="tracker-completed">
+                                    ✓ COMPLETED
+                                </span>
+
+                            {% else %}
+
+                                <span class="tracker-pending">
+                                    ! PENDING
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="no-assignments">
+
+                        <h3>
+                            No assignments yet.
+                        </h3>
+
+                        <p>
+                            Assignments created in NEXORA will appear here.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

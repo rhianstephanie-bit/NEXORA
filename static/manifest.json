@@ -1,0 +1,10 @@
+{
+    "name": "NEXORA",
+    "short_name": "NEXORA",
+    "description": "Your Smart Academic Companion",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fff4f9",
+    "theme_color": "#d85b91",
+    "orientation": "portrait"
+}

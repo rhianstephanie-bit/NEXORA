@@ -1,0 +1,101 @@
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA | Teacher Profile</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="background-circle circle-one"></div>
+    <div class="background-circle circle-two"></div>
+
+    <main class="teacher-profile-container">
+
+        <div class="teacher-profile-card">
+
+            <p class="small-text">NEXORA • TEACHER</p>
+
+            <h1>Teacher Profile</h1>
+
+            <p class="teacher-profile-subtitle">
+                Enter your information to continue to your teacher space.
+            </p>
+
+            <form action="{{ url_for('teacher_profile') }}" method="POST">
+
+                <div class="teacher-form-grid">
+
+                    <div class="teacher-field">
+                        <label>Teacher Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter your name"
+                            value="{{ teacher.name }}"
+                            required
+                        >
+                    </div>
+
+                    <div class="teacher-field">
+                        <label>Subject</label>
+                        <input
+                            type="text"
+                            name="subject"
+                            placeholder="e.g. ICT"
+                            value="{{ teacher.subject }}"
+                            required
+                        >
+                    </div>
+
+                    <div class="teacher-field">
+                        <label>Grade</label>
+                        <input
+                            type="text"
+                            name="grade"
+                            placeholder="e.g. Grade 11"
+                            value="{{ teacher.grade }}"
+                            required
+                        >
+                    </div>
+
+                    <div class="teacher-field">
+                        <label>Section</label>
+                        <input
+                            type="text"
+                            name="section"
+                            placeholder="e.g. Q"
+                            value="{{ teacher.section }}"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <button type="submit" class="teacher-profile-button">
+                    ENTER TEACHER SPACE →
+                </button>
+
+            </form>
+
+            <a href="{{ url_for('role') }}" class="teacher-profile-back">
+                ← Choose another role
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
